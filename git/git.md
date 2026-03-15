@@ -27,6 +27,7 @@
   - [feature にリモートリポジトリの最新情報を取り込む](#feature-にリモートリポジトリの最新情報を取り込む)
   - [初期設定コマンド](#初期設定コマンド)
   - [remoteリポジトリとlocalリポジトリを紐づけるコマンド](#remoteリポジトリとlocalリポジトリを紐づけるコマンド)
+  - [`ssh-keygen`設定](#ssh-keygen設定)
 
 
 # git
@@ -286,4 +287,21 @@ URLにはGitHubのリポジトリURLを記述する。
 
 ```bash
 git remote add origin https://github.com/yourname/your-repo.git
+```
+
+## `ssh-keygen`設定
+GitHubで`ssh-keygen`の設定後、設定ファイルが以下になっているならOK
+```bash
+vi ~/.ssh/config
+
+# Host github.com
+#   AddKeysToAgent yes
+#   UseKeychain yes
+#   UseKeychain yes             # Macの場合のみ。Windowsなら不要
+#   IdentityFile ~/.ssh/id_rsa  # 自分の秘密鍵のパスに合わせて変更
+```
+本来は一度設定すればいいが、OSアップデートなどで外れることもあるようなので、再度設定する
+```bash
+# macOS の場合
+ssh-add --apple-use-keychain ~/.ssh/id_rsa  # <- ここには自分の秘密鍵のパス
 ```
